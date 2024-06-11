@@ -1,0 +1,19 @@
+version: '3'
+
+tasks:
+  default:
+    desc: blargh
+    cmds:
+      - task --list
+    silent: true
+
+  deploy:
+    desc: Deploy main.app to google functions
+    cmds:
+      - echo 'gcloud functions deploy post_daily_countdown \
+          --runtime python39 \
+          --trigger-http \
+          --allow-unauthenticated \
+          --set-env-vars "SLACK_BOT_TOKEN=$SLACK_BOT_TOKEN,SLACK_CHANNEL_ID=$SLACK_CHANNEL_ID,CALENDAR_ID=$CALENDAR_ID,GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS" \
+          --project=pangeam-general-ops --gen2'
+    silent: true
